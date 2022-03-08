@@ -99,4 +99,22 @@ export class Api {
       return { kind: "bad-data" }
     }
   }
+
+  async getData(page: number): Promise<Types.GetHits> {
+    const response: ApiResponse<any> = await this.apisauce.get(`search_by_date?tags=story&page=${page}`)
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+
+      return { kind: "ok", data: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
 }

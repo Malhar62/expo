@@ -15,6 +15,8 @@ import { NavigatorParamList } from "../../navigators"
 import { color, spacing } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { useRoute } from "@react-navigation/native"
 export const logoIgnite = require("./logo-ignite.png")
 export const heart = require("./heart.png")
 
@@ -135,48 +137,24 @@ export const DemoScreen: FC<StackScreenProps<NavigatorParamList, "demo">> = obse
       },
       [],
     )
-
+    const obj = useRoute<any>().params.item;
+    function Send() {
+      return Object.entries(obj).map(([key, value]) => {
+        return (
+          <Text style={{ color: 'black' }}>
+            {key}:{value}{'\n'}
+          </Text>
+        );
+      });
+    }
     return (
-      <View testID="DemoScreen" style={FULL}>
-        <GradientBackground colors={["#422443", "#281b34"]} />
-        <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-          <Header
-            headerTx="demoScreen.howTo"
-            leftIcon="back"
-            onLeftPress={goBack}
-            style={HEADER}
-            titleStyle={HEADER_TITLE}
-          />
-          <Text style={TITLE} preset="header" tx="demoScreen.title" />
-          <Text style={TAGLINE} tx="demoScreen.tagLine" />
-          <BulletItem text="Integrated here, Navigation with State, TypeScript, Storybook, Solidarity, and i18n." />
-          <BulletItem
-            text={`To run Storybook, press ${platformCommand} or shake the device to show the developer menu, then select "Toggle Storybook"`}
-          />
-          <BulletItem text="Load up Reactotron!  You can inspect your app, view the events, interact, and so much more!" />
-          <View>
-            <Button
-              style={DEMO}
-              textStyle={DEMO_TEXT}
-              tx="demoScreen.reactotron"
-              onPress={demoReactotron}
-            />
-            <Text style={HINT} tx={`demoScreen.${Platform.OS}ReactotronHint` as const} />
-          </View>
-          <Button
-            style={DEMO}
-            textStyle={DEMO_TEXT}
-            tx="demoScreen.demoList"
-            onPress={() => navigation.navigate("demoList")}
-          />
-          <Image source={logoIgnite} style={IGNITE} />
-          <View style={LOVE_WRAPPER}>
-            <Text style={LOVE} text="Made with" />
-            <Image source={heart} style={HEART} />
-            <Text style={LOVE} text="by Infinite Red" />
-          </View>
-        </Screen>
-      </View>
+
+      <Screen style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <Text style={{ color: 'black' }}>{obj.author}</Text>
+          <Text style={{ color: 'black' }}>{obj.title}</Text>
+        </SafeAreaView>
+      </Screen>
     )
   },
 )
