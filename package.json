@@ -5,18 +5,62 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "coverage": "yarn test -- --coverage"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/_tests_/jest-setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/e2e"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "png",
+      "svg"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!@react-native|react-native)"
+    ]
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native-stack": "^6.5.0",
+    "@reduxjs/toolkit": "^1.8.0",
+    "@testing-library/react-native": "^9.0.0",
+    "axios": "^0.26.0",
+    "babel-preset-expo": "^9.0.2",
     "expo": "~44.0.0",
+    "expo-cli": "^5.2.0",
     "expo-status-bar": "~1.2.0",
+    "moment": "^2.29.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "react-native-gesture-handler": "^2.3.0",
+    "react-native-safe-area-context": "^4.1.2",
+    "react-native-screens": "^3.13.1",
+    "react-native-web": "0.17.1",
+    "react-redux": "^7.2.6",
+    "react-test-renderer": "^17.0.2",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^4.0.4",
+    "jest": "^27.5.1"
   },
   "private": true
 }
